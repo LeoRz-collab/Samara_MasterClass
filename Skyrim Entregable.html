@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Game Ever 🐉</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+body{
+        margin: 0;
+        background-color: black;
+        font-family: 'cinzel', serif;
+        color: white;
+    }
+
+    .hero {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .hero img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .hero h1 {
+        position: absolute;
+        font-size: 120px;
+        color: #dcdcdc;
+        letter-spacing: 10px;
+        text-shadow: 
+            0 0 10px#ffffff,
+            0 0 20px #b0b0b0,
+            0 0 30px #8a8a8a,
+            0 0 40px #7f7f7f,
+            0 0 70px #6f6f6f;
+        opacity: 0;
+        animation: aparecer 2s ease-out forwards;
+        z-index: 2;
+    }
+
+    @keyframes aparecer {
+        from { opacity: 0; transform: scale(0.8);}
+        to { opacity: 1; transform: scale(1);}
+    }
+
+    .contenido {
+        padding: 50px 20px;
+        max-width: 900px;
+        margin: 0 auto;
+        text-align: left;
+    }
+
+</style>
+</head>
+<body>
+    <div class="hero">
+        <img src="https://imgs.search.brave.com/DG0yceJ3QRbwD8RNx2vyCFQVm8CafCAX3TCyXzvlXfE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJhY2Nlc3Mu/Y29tL2Z1bGwvOTMx/Nzc1LmpwZw" alt="Skyrim">
+        <h1>SKYRIM</h1>
+    </div>
+    <div class="contenido">
+        <h2>Historia y Ambientación</h2>
+        <p>Luego lo relleno je</p>
+
+        <h2>Zonas Especiales</h2>
+        <p>Luego las relleno x2 jeje</p>
+
+        <h2>Clases</h2>
+        <p>Luego lo relleno x3 jejeje</p>
+    </div>
+</body>
+</html>
