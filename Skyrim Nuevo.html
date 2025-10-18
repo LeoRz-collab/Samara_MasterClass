@@ -1,0 +1,202 @@
+<!-- Indica el tipo de documento -->
+<!DOCTYPE html>
+
+<!-- Indica el idioma principal de la pagina -->
+<html lang="en">
+
+<!-- Informacion de la pagina -->
+<head>
+
+    <!-- "UTF-8" mas usado por su compatabilidad -->
+    <meta charset="UTF-8">
+
+    <!-- Permite que la pagina se ajuste a los diversos dispositivos -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Permite utilizar el estilo CSS de un archivo aparte -->
+    <link rel="stylesheet" href="C:\Users\Chimo_Leo\Desktop\StyleSkyrim.css">
+
+    <!-- Titulo de la pagina en el navegador -->
+    <title>BestGameEver</title>
+
+<!-- El Style se utiliza para poder, <style></style>, valga la redundancia darle estilo a la pagina -->
+
+</head>
+<body>
+    <!-- "div" son agrupadores de elementos:
+    1 Contenedor principal del "Carrusel"
+    2 Imagen, con "id" y "class" para poder manipularlo y ajustarlo
+    3 y 4 Flechas (&#10094 y &#10095) representan flechas
+    5 la imagen del logo -->
+    <div class="carrusel-container">
+        <img id="carrusel-img" width="750" height="400" src="https://images6.alphacoders.com/393/thumbbig-393989.webp" alt="Dovahkiin" class="carrusel-image">
+        <div class="arrow-left arrow">&#10094;</div>
+        <div class="arrow-right arrow">&#10095;</div>
+        <img src="https://images.ctfassets.net/rporu91m20dc/40izhaDwBKiBsADfYydyaJ/fe2d686025966424cfbba231e3aaefb4/logo-tesv-skyrim-se-light.png"
+             alt="Skyrim Logo"
+             class="carrusel-logo">
+
+    <!-- Controla el area visible del fondo -->
+        <div class="fondo-wrapper">    
+             <div class="carrusel-background" id="carrusel-bg"></div>
+        </div>
+
+    <!-- Controla el pie de pagina -->
+        <div class="top-bar">
+            ºLeothesda
+        </div>
+
+    <!-- 1 Una clase / lista, que contiene todos los "dots"
+     2 "dot active" actualiza a la imagen que se muestra "actualmente"
+     3 al 10 "span" es cada imagen del carrusel -->
+        <div class="dots-container">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
+
+        <div class="menu-secciones">
+            <button class="seccion active" data-contenido="history">HISTORIA Y AMBIENTACION</button>
+            <button class="seccion" data-contenido="clases">PERSONAJES</button>
+            <button class="seccion" data-contenido="places">LUGARES EMBLEMATICOS</button>
+        </div>
+        <div class="contenido-secciones">
+            <div id="history" class="contenido visible">Aun no</div>
+            <div id="clases" class="contenido">he escrito</div>
+            <div id="contact" class="contenido">nada de nada</div>
+        </div>
+    <!--Script son instrucciones que vuelven la pagina interactiva o 
+    que permiten que automatice algunas tareas-->
+    <script>
+
+        // Const, variables constantes, que no cambian, solo de usan, listas
+        const imagenes = [
+            'https://images6.alphacoders.com/393/thumbbig-393989.webp',
+            'https://images.alphacoders.com/203/thumbbig-203543.webp',
+            'https://images5.alphacoders.com/578/thumbbig-578506.webp',
+            'https://images.alphacoders.com/491/thumbbig-491588.webp',
+            'https://images2.alphacoders.com/526/thumbbig-526709.webp',
+            'https://images4.alphacoders.com/648/thumbbig-648138.webp',
+            'https://images5.alphacoders.com/420/thumbbig-420461.webp',
+            'https://images4.alphacoders.com/203/thumbbig-203556.webp',
+        ];
+        
+        /* Let cambia su valor, en este caso, marca una pauta para que se empiece 
+        desde el inicio "0" */
+        let indiceActual = 0;
+        
+        /* En este caso, Const fija las variables para conectar nuestro
+        HTML con JavaScript, controla imagenes y botones */
+        const carruselImg = document.getElementById('carrusel-img');
+        const carruselBg = document.getElementById('carrusel-bg');
+        const flechaIzq = document.querySelector('.arrow-left');
+        const flechaDer = document.querySelector('.arrow-right');
+
+        /* Junta todos los puntos en una lista, es decir, los ordena (1)
+        Permite reconocer la posicion "i" de cada punto "dot" (2)
+        Permite dar "click" en los puntos (3)
+        Al dar "click" ubica la imagen en tal posicion y la muestra (4 y 5) */
+ /*1*/  const dots = document.querySelectorAll('.dot');
+ /*2*/  dots.forEach((dot, i) => {
+ /*3*/      dot.addEventListener('click', () => {
+ /*4*/          indiceActual = i;
+ /*5*/          actualizarImagen();
+            });
+        });
+
+        /* Estos comandos permiten que al pasar el mouse por la imagen o quitarla
+        la imagen deje de cambiar o continua cambiando */ 
+        const carruselContainer = document.querySelector('.carrusel-container');
+        
+        carruselContainer.addEventListener('mouseenter', () => {
+            clearInterval(intervalo);
+        });
+
+        carruselContainer.addEventListener('mouseleave', () => {
+            intervalo = setInterval(siguienteImagen, 5000);
+        });
+        
+
+        const secciones = document.querySelectorAll('.seccion');
+        const contenidos = document.querySelectorAll('.contenido');
+
+        secciones.forEach(btn => {
+            btn.addEventListener('click', () => {
+                secciones.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const id = btn.dataset.contenido;
+                contenidos.forEach(c => c.classList.remove('visible'));
+                document.getElementById(id).classList.add('visible');
+            })
+        })
+
+        /* Definimos una funcion (1)
+        Crea una lista con todos los ".dot" (2)
+        Reconoce cada "dot" por su posicion "i" (3)
+        Activa el punto seleccionado con base en su "i" y lo resalta (4) */
+ /*1*/  function actualizarDots() {
+ /*2*/      const dots = document.querySelectorAll('.dot');
+ /*3*/      dots.forEach((dot, i) => {
+ /*4*/          dot.classList.toggle('active', i === indiceActual);
+            });
+        }
+
+        /* Definimos una funcion
+        Hace deparecer la imagen y la desplaza un poco a la derecha
+        Inicia el efecto de transicion */
+        function actualizarImagen() {
+            carruselImg.style.opacity = 0;
+            carruselImg.style.transform = 'translateX(100px)';
+
+        /* Un comando para esperar antes de ejecutar los siguientes codigos */    
+            setTimeout(() => {
+        
+        /* Cambia la imagen principal y el fondo siguiendo la URL indicada */
+                carruselImg.src = imagenes[indiceActual];
+                carruselBg.style.backgroundImage = `url(${imagenes[indiceActual]})`;
+        
+        /* Trae la imagen siguiente y la vuelve visible
+        Finaliza el efecto de transicion */
+                carruselImg.style.transform = 'translateX(0)';
+                carruselImg.style.opacity = 1;
+
+        /* Resalta el punto correspondiente a la imagen */
+                actualizarDots();
+             }, 300);
+        }
+
+        /* Define una funcion para pasar de imagen, 
+        "% imagenes.length" al finalizar regresa a la primera imagen */ 
+        function siguienteImagen() {
+            indiceActual = (indiceActual + 1) % imagenes.length;
+            actualizarImagen();
+        }
+
+        /* Guarda el intervalo como variable para pdoer modificarlo,
+        Llama la siguiente imagen en "x" tiempo en ms */
+        let intervalo = setInterval(siguienteImagen, 5000);
+
+        /* Permite darle "click" y avanzar a la siguiente imagen */
+        flechaDer.addEventListener('click', () => {
+            indiceActual = (indiceActual + 1) % imagenes.length;
+            actualizarImagen();
+        });
+
+        /* Permite darle "click" y volver a la imagen anterior */
+        flechaIzq.addEventListener('click', () => {
+            indiceActual = (indiceActual - 1 + imagenes.length) % imagenes.length;
+            actualizarImagen();
+        });
+
+        /* Muestra la primera imagen */
+        actualizarImagen();
+    </script>
+</body>
+</html>

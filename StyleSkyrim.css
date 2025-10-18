@@ -1,0 +1,176 @@
+body {
+    background-color: rgb(255, 255, 255);
+    display: block; /* Define como se comporta un elemento en la pagina */
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* . es para crear clases, estas se usan junto a los contenedores div para que 
+modifique su contenido a los parametros aca establecidos 
+cada .carrusel le da estilo a cada una de las partes de mi "carrusel" */
+.carrusel-container {
+    position: relative;
+    width: 80%;
+    max-width: 900px;
+    margin: 120px auto 0 auto;
+    overflow: hidden;
+    border-radius: 0px;
+}
+
+.carrusel-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    filter: blur(90px);
+    transform: scale(1.2);
+    transform-origin: center;
+    z-index: -1;
+    background-size: cover;
+    background-position: center;
+}
+
+.carrusel-image {
+
+    display: block;
+    position: relative;
+    z-index: 1;
+    margin: 75px auto;
+    border-radius: 0px;
+    transition: transform 1.5s ease, opacity 1.5s ease;
+}
+
+.carrusel-logo {
+    position: absolute;
+    top: 0px;
+    left: 120px;
+    width: 150px;
+    height: auto;
+    z-index: 3;
+}
+
+/* .arrow le da estilo a cada de las flechas, :hover da efectos visuales 
+y -left/-right ubicarlas  */
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 50px;
+    color: white;
+    opacity: 0.5;
+    cursor: pointer;
+    z-index: 2;
+    user-select: none;
+    padding: 10px;
+}
+
+.arrow:hover {
+    opacity: 0.75;
+    transform: translateY(-50%) scale(1.2);
+}
+
+.arrow-left {
+    left: 95px;
+}
+
+.arrow-right {
+    right: 95px;
+}
+
+/* -container maneja la posicion de los puntos, .dot el estilo visual de los puntos
+y el .active resalta el punto correspondiente a cada imagen */
+.dots-container {
+    position: absolute;
+    bottom: 40px;
+    width: 100%;
+    text-align: center;
+    z-index: 2;
+}
+
+.dot {
+    height: 2px;
+    width: 50px;
+    margin: -2px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 0px;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+    background-color: white;
+    /* transform: scaleX(1.5); para que se agrande el boton activo*/
+}
+
+/* Se maneja la imagen del fondo borroso, en este caso es un color solido */
+.fondo-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 77.5vh;
+    overflow: hidden;
+    z-index: -1;
+}
+
+/* Otra clases que contiene el pie de pagina y su respectiva visualizacion*/
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #1a1a1a;
+    z-index: 4;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    padding-left: 100px;
+}
+
+.menu-secciones {
+    display: flex;
+    justify-content: left;
+    gap: 10px;
+    background-color: white;
+    padding: 30px 250px;
+    margin-top: -10px;
+}
+
+.menu-secciones .seccion {
+    background: none;
+    border: none;
+    font-size: 14.5px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #b0b0b0;
+    transition: color 0.3s, border-bottom 0.3s;
+    border-bottom: 3px solid transparent;
+}
+
+.menu-secciones .seccion.active {
+    color: #00756a;
+    border-bottom: 2px solid #00d0c8;
+}
+
+.contenido-seccion {
+    padding: 20px;
+    text-align: center;
+}
+
+.contenido {
+    display: none;
+    margin-left: 250px;
+    margin-top: 250px;
+}
+
+.contenido.visible {
+    display: block;
+}
